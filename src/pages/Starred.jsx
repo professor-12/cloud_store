@@ -4,9 +4,10 @@ import useQuery from '../hooks/useQuery'
 import toast from 'react-hot-toast'
 import FileCard from '../components/FileCard'
 import Loading from '../components/Loading'
+import { BASE_URL } from '../lib/constants'
 
 const Starred = () => {
-      const { fetchUser } = useFetch('http://localhost:8000/api/get-file/starred')
+      const { fetchUser } = useFetch(BASE_URL + '/api/get-file/starred')
       const { data, error, isPending } = useQuery(async () => fetchUser())
 
 

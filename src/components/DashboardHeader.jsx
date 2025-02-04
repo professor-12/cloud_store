@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from './ProtectRoute'
 import Search from './Search'
 import { useNavigate } from 'react-router-dom'
+import Mobile from './ui/Mobile'
 
 const DashboardHeader = ({ setTheme, theme }) => {
       const light = theme == "light"
@@ -31,8 +32,7 @@ const DashboardHeader = ({ setTheme, theme }) => {
                         <div className='h-full aspect-square cursor-pointer rounded-full bg-accent to-transparent' />
 
                   </div>
-
-
+                  <Mobile />
             </header >
       )
 }

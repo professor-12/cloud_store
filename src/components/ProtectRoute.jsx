@@ -13,7 +13,7 @@ const ProtectRoute = ({ children }) => {
       if (!data) {
             return <Navigate to="/auth/login" replace />
       }
-      return <UserContext.Provider value={{ user: data }}>
+      return <UserContext.Provider value={{ user: data?.user }}>
             {children}
       </UserContext.Provider>
 }

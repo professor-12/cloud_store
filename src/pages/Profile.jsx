@@ -63,20 +63,20 @@ const Profile = () => {
       }
 
       return (
-            <div className='p-6'>
-                  <h2 className="text-3xl">Profile</h2>
+            <div className='p-6 overflow-auto'>
+                  <h2 className="text-3xl text-accent-foreground/70">Profile</h2>
                   <div className='p-12'>
-                        <form onSubmit={handleSubmit} className='flex w-full gap-12'>
+                        <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-12'>
                               <div>
-                                    <div className='bg-slate-500/10 flex items-center justify-center relative  overflow-hidden rounded-full h-[20rem] w-[20rem]'>
+                                    <div className='bg-slate-500/10 flex items-center justify-center relative  overflow-hidden rounded-full md:h-[20rem] w-[8rem] h-[8rem] md:w-[20rem]'>
                                           <input onChange={(e) => {
                                                 setFile(e.target.files[0])
-                                          }} type="file" accept='.png,.jpg' className='opacity-0 z-1 absolute cursor-pointer h-[20rem] w-[20rem]' />
+                                          }} type="file" accept='.png,.jpg' className='opacity-0 z-1 absolute cursor-pointer h-full w-full' />
                                           <p className='text-3xl text-neutral-500/50'>Choose file</p>
                                           {
                                                 file instanceof MediaSource || file instanceof Blob ?
                                                       <img src={URL.createObjectURL(file)} className="w-full bg-cover  h-full absolute" alt="add" />
-                                                      : <img src={"http://localhost:8000" + file} className="w-full bg-cover  h-full absolute" alt="add" />
+                                                      : <img src={BASE_URL + file} className="w-full bg-cover  h-full absolute" alt="add" />
                                           }
                                     </div>
                               </div>

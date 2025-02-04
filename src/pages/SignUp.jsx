@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Authenticate } from "../lib";
+import { BASE_URL } from "../lib/constants";
 
 const SignUp = () => {
       const [formsState, setFormState] = useState({ email: "", name: "", password: "" });
@@ -32,7 +33,7 @@ const SignUp = () => {
 
             setIsLoading(true);
             try {
-                  const request = await fetch("http://localhost:8000/api/register/", {
+                  const request = await fetch(BASE_URL + "/api/register/", {
                         method: "POST",
                         body: JSON.stringify({ ...formsState, username: formsState.name }),
                         headers: {

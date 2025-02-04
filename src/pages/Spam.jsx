@@ -3,9 +3,10 @@ import useQuery from '../hooks/useQuery'
 import useFetch from '../hooks/useFetch'
 import Loading from '../components/Loading'
 import FileCard from '../components/FileCard'
+import { BASE_URL } from '../lib/constants'
 
 const Spam = () => {
-      const { fetchUser } = useFetch("http://localhost:8000/api/spam/")
+      const { fetchUser } = useFetch(BASE_URL + "/api/spam/")
       const { data, error, isPending, refetch } = useQuery(fetchUser)
 
       console.log(data?.length)

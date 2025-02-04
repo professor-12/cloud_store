@@ -4,13 +4,13 @@ import useMutation from "../hooks/useMutation";
 import useFetch from "../hooks/useFetch";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import { BASE_URL } from "../lib/constants"
 const File = () => {
       const [dragActive, setDragActive] = useState(false);
       const [file, setFile] = useState(null);
       const [name, setName] = useState("");
       const { mutate, data, error, loading } = useMutation();
-      const { fetchUser } = useFetch("http://localhost:8000/api/file/");
+      const { fetchUser } = useFetch(BASE_URL + "/api/file/");
 
 
       const handleSubmit = async (e) => {

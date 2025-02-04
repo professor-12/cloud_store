@@ -4,11 +4,12 @@ import FileCard from '../components/FileCard'
 import useFetch from '../hooks/useFetch'
 import { Link, Navigate } from 'react-router-dom'
 import Loading from '../components/Loading'
+import { BASE_URL } from '../lib/constants'
 
 
 
 const MyStorage = () => {
-      const { fetchUser } = useFetch('http://localhost:8000/api/get-file/')
+      const { fetchUser } = useFetch(BASE_URL + '/api/get-file/')
       const token = localStorage.getItem("token")
       const { data, error, isPending } = useQuery(async () => fetchUser())
 
