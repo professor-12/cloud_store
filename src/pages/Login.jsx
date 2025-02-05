@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Authenticate } from "../lib";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../lib/constants";
 
 const Login = () => {
       const [formsState, setFormState] = useState({
@@ -27,7 +28,7 @@ const Login = () => {
             if (!validateForm()) return;
             setServerErrors(null)
             setIsLoading(true)
-            const request = await fetch("http://127.0.0.1:8000/api/login/", {
+            const request = await fetch(BASE_URL + "/api/login/", {
                   method: 'POST',
                   body: JSON.stringify({ email: formsState.email, password: formsState.password }),
                   headers: {
