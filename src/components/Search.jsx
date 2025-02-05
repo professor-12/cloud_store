@@ -9,7 +9,10 @@ const Search = () => {
       const navigate = useNavigate();
 
       useEffect(() => {
-            if (debouncedValue.trim().length == 0) return;
+            if (debouncedValue.trim().length == 0) {
+                  navigate("/home")
+                  return;
+            }
 
             const newParams = new URLSearchParams(searchParams);
             newParams.set("q", debouncedValue);

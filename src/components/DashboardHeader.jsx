@@ -4,7 +4,7 @@ import Search from './Search'
 import { useNavigate } from 'react-router-dom'
 import Mobile from './ui/Mobile'
 
-const DashboardHeader = ({ setTheme, theme }) => {
+const DashboardHeader = ({ setTheme, theme, setState }) => {
       const light = theme == "light"
       const { user } = useContext(UserContext)
       const navigate = useNavigate()
@@ -12,8 +12,10 @@ const DashboardHeader = ({ setTheme, theme }) => {
       return (
             <header className='sticky  justify-between border-b border-border  top-0 h-[4rem] p-1 pl-8 flex items-center'>
                   {/* Search Component */}
+                  <div onClick={() => { setState(prev => !prev) }} className='text-popover-foreground/80 cursor-pointer'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+                  </div>
                   <Search />
-
                   <div className='flex gap-3 h-full p-2 pr-6 items-center'>
                         <div onClick={setTheme} className='cursor-pointer text-popover-foreground p-2 rounded-full'>
                               {!light ?
@@ -26,13 +28,12 @@ const DashboardHeader = ({ setTheme, theme }) => {
                               localStorage.removeItem("token");
                               navigate("/auth/login", { replace: true })
 
-                        }} className='cursor-pointer text-popover-foreground p-2 rounded-full'>
+                        }} className='cursor-pointer max-sm:hidden text-popover-foreground p-2 rounded-full'>
                               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
                         </div>
                         <div className='h-full aspect-square cursor-pointer rounded-full bg-accent to-transparent' />
 
                   </div>
-                  <Mobile />
             </header >
       )
 }

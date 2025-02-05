@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-const links = [
+export const links = [
       {
             path: "", svg: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>,
             name: "Home"
@@ -25,7 +25,7 @@ const links = [
       // },
 ]
 
-const links2 = [
+export const links2 = [
       {
             path: "profile", svg: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>,
             name: "Profile"
@@ -45,49 +45,52 @@ const SideBar = () => {
       const a = useLocation()
       const pathName = a.pathname.split("/")[2] ?? ""
       return (
-            <aside className='p-5  h-screen bg-primary-foreground'>
-                  <div className='flex px-4 relative items-center mb-6 gap-3 cursor-pointer text-card-foreground'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" strokeLinejoin="round" class="lucide lucide-cloud"> <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg>
-                        <h1 className='text-2xl max-lg:text-xl font-stretch-normal font-medium '>
-                              Cloud Store
-                        </h1>
-                  </div>
+            <>
+                  <aside className='p-5  h-screen bg-primary-foreground'>
+                        <div className='flex px-4 relative items-center mb-6 gap-3 cursor-pointer text-card-foreground'>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" strokeLinejoin="round" class="lucide lucide-cloud"> <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg>
+                              <h1 className='text-2xl max-lg:text-xl font-stretch-normal font-medium '>
+                                    Cloud Store
+                              </h1>
+                        </div>
 
-                  <ul className='h-full space-y-10'>
-                        <ul className='flex gap-1 flex-col  text-[15px]'>
-                              {
-                                    links.map(({ name, path, ...s }, index) => {
-                                          const isActive = path === pathName
-                                          return (
-                                                <li onClick={() => navigate(path)} key={index} className={`flex text-card-foreground/60  font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent-foreground/10 text-blue-800/90" : null}`}>
-                                                      {<s.svg />}
-                                                      <p>
-                                                            {name}
-                                                      </p>
-                                                </li>
-                                          )
-                                    })
-                              }
+                        <ul className='h-full space-y-10'>
+                              <ul className='flex gap-1 flex-col  text-[15px]'>
+                                    {
+                                          links.map(({ name, path, ...s }, index) => {
+                                                const isActive = path === pathName
+                                                return (
+                                                      <li onClick={() => navigate(path)} key={index} className={`flex text-card-foreground/60  font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent-foreground/10 text-blue-800/90" : null}`}>
+                                                            {<s.svg />}
+                                                            <p>
+                                                                  {name}
+                                                            </p>
+                                                      </li>
+                                                )
+                                          })
+                                    }
 
 
+                              </ul>
+                              <ul className='flex gap-1 flex-col  text-[15px]'>
+                                    {
+                                          links2.map(({ name, path, ...s }, index) => {
+                                                const isActive = path === pathName
+                                                return (
+                                                      <li onClick={() => navigate(path)} key={index} className={`flex  text-muted-foreground font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-blue-300/40 text-blue-800/90" : "hover:bg-slate-200/90  "}`}>
+                                                            {<s.svg />}
+                                                            <p>
+                                                                  {name}
+                                                            </p>
+                                                      </li>
+                                                )
+                                          })
+                                    }
+                              </ul>
                         </ul>
-                        <ul className='flex gap-1 flex-col  text-[15px]'>
-                              {
-                                    links2.map(({ name, path, ...s }, index) => {
-                                          const isActive = path === pathName
-                                          return (
-                                                <li onClick={() => navigate(path)} key={index} className={`flex  text-muted-foreground font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-blue-300/40 text-blue-800/90" : "hover:bg-slate-200/90  "}`}>
-                                                      {<s.svg />}
-                                                      <p>
-                                                            {name}
-                                                      </p>
-                                                </li>
-                                          )
-                                    })
-                              }
-                        </ul>
-                  </ul>
-            </aside>
+                  </aside>
+
+            </>
       )
 }
 
