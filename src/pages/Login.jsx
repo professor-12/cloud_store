@@ -28,32 +28,40 @@ const Login = () => {
             if (!validateForm()) return;
             setServerErrors(null)
             setIsLoading(true)
-            const request = await fetch(BASE_URL + "/api/login/", {
-                  method: 'POST',
-                  body: JSON.stringify({ email: formsState.email, password: formsState.password }),
-                  headers: {
-                        "Content-Type": "application/json",
 
-                  }
-            })
-            let response;
             try {
-                  response = await request.json();
 
+                  const request = await fetch(BASE_URL + "/api/login/", {
+                        method: 'POST',
+                        body: JSON.stringify({ email: formsState.email, password: formsState.password }),
+                        headers: {
+                              "Content-Type": "application/json",
+
+                        }
+                  })
+                  let response;
+                  try {
+                        response = await request.json();
+
+                  } catch (err) {
+                        response = null
+                        return console.log(err)
+                  }
+                  if (!request.ok) {
+                        setServerErrors(Object.values(response)[0])
+                        setIsLoading(false)
+                        return;
+                  }
+                  toast.success("Login Successfull")
+                  navigate("/home", { replace: true })
+                  Authenticate("token", response.token);
+                  setIsLoading(false);
             } catch (err) {
-                  response = null
-                  return console.log(err)
+                  setServerErrors(JSON.stringify(err))
             }
-            if (!request.ok) {
-                  setServerErrors(Object.values(response)[0])
+            finally {
                   setIsLoading(false)
-                  return;
             }
-            toast.success("Login Successfull")
-            navigate("/home", { replace: true })
-            Authenticate("token", response.token);
-            setIsLoading(false);
-
       };
 
 
