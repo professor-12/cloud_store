@@ -5,12 +5,13 @@ import useMutation from '../hooks/useMutation'
 import useFetch from '../hooks/useFetch'
 import { GETNENV } from '../lib/utlis'
 import { BASE_URL } from '../lib/constants'
+import DatePicker from 'react-date-picker'
 
 
 
 const Profile = () => {
 
-      const [file, setFile] = useState("http")
+      const [file, setFile] = useState({ file: "", url: "" })
       const [bio, setBio] = useState("")
       const [location, setLocation] = useState("")
       const [dob, setDob] = useState("")
@@ -29,7 +30,7 @@ const Profile = () => {
                   setBio(data.bio)
                   setLocation(data.location)
                   setDob(data.birth_date)
-                  setFile(data.profile_picture)
+                  setFile((prev) => ({ ...prev, url: data.profile_picture }))
 
             }
             fetchData()
@@ -44,7 +45,7 @@ const Profile = () => {
                   setBio(data.bio)
                   setLocation(data.location)
                   setDob(data.birth_date)
-                  setFile(data.profile_picture)
+                  setFile({ file: null, url: data.profile_picture })
             }
 
       }, [error, data])
@@ -56,10 +57,16 @@ const Profile = () => {
             const date = new Date(dob || -1)
             const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
             formData.append('birth_date', formattedDate)
+            formData.append("profile_picture", file.file)
             await mutate(async () => {
                   return fetchUser({ method: "POST", body: formData })
             })
 
+      }
+      const uploadFile = (mediasource) => {
+            const url = URL.createObjectURL(mediasource)
+            setFile((prev) => { return { file: mediasource, url } })
+            console.log(url)
       }
 
       return (
@@ -67,17 +74,13 @@ const Profile = () => {
                   <h2 className="text-3xl text-accent-foreground/70">Profile</h2>
                   <div className='p-12'>
                         <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-12'>
-                              <div>
-                                    <div className='bg-slate-500/10 flex items-center justify-center relative  overflow-hidden rounded-full md:h-[20rem] w-[8rem] h-[8rem] md:w-[20rem]'>
-                                          <input onChange={(e) => {
-                                                setFile(e.target.files[0])
-                                          }} type="file" accept='.png,.jpg' className='opacity-0 z-1 absolute cursor-pointer h-full w-full' />
-                                          <p className='text-3xl text-neutral-500/50'>Choose file</p>
-                                          {
-                                                file instanceof MediaSource || file instanceof Blob ?
-                                                      <img src={URL.createObjectURL(file)} className="w-full bg-cover  h-full absolute" alt="add" />
-                                                      : <img src={BASE_URL + file} className="w-full bg-cover  h-full absolute" alt="add" />
-                                          }
+                              <div className=''>
+                                    <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
+                                          <img src={file.url} alt="profie_picture" />
+                                          <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center bg-blue-600/30   overflow-hidden group-hover:opacity-100 cursor-pointer h-full flex duration-700 transition-all '>
+                                                <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='' onChange={(e) => uploadFile(e.target.files[0])} />
+                                                <p className='text-center text-2xl'>Upload Image</p>
+                                          </div>
                                     </div>
                               </div>
                               <div className='space-y-4 text-card-foreground/80 w-full'>
@@ -91,7 +94,8 @@ const Profile = () => {
                                     </div>
                                     <div className='space-y-3'>
                                           <label className='block' htmlFor="dob">Date of Birth</label>
-                                          <input value={dob} onChange={(e) => { setDob(e.target.value); console.log(e.target.value) }} id="dob" name='location' type="date" className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' />
+                                          <DatePicker maxDate={new Date("12-12-2020")} className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' id="dob" onChange={setDob} value={dob ?? new Date()} />
+
                                     </div>
                                     <button disabled={!bio && !dob && !location || loading} className='disabled:bg-blue-500/70 p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-blue-500'>Edit Profile</button>
 

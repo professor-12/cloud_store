@@ -43,17 +43,18 @@ const SignUp = () => {
                   const response = await request.json();
                   if (!request.ok) {
                         setServerError(Object.values(response)[0]);
-                        setIsLoading(false);
                         return;
                   }
                   setFormState({ email: "", name: "", password: "" });
                   Authenticate("token", response.token)// Reset form
-                  setIsLoading(false);
-                  navigate("/");
+
+                  navigate("/home");
             } catch (error) {
                   console.error("Error during submission:", error);
                   setServerError("An unexpected error occurred.");
-                  setIsLoading(false);
+
+            } finally {
+                  setIsLoading(false)
             }
       };
 

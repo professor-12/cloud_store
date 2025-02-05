@@ -33,7 +33,7 @@ const File = () => {
             setFile(null);
             setName("");
       };
-
+      
       useEffect(() => {
             if (error) toast.error(error);
             if (data) toast.success("File Uploaded Successfully");

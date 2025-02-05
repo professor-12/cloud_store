@@ -89,6 +89,10 @@
     --color-chart-5: hsl(var(--chart-5));
 }
 
+.react-date-picker__wrapper {
+    border: none !important;
+}
+
 .gradient-circle {
     background: radial-gradient(rgba(23, 32, 34, 0.6));
 }

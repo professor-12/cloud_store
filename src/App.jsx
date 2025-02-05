@@ -15,6 +15,8 @@ import FileContext from "./context/file-context"
 import Starred from "./pages/Starred"
 import Search from "./pages/Search"
 import Spam from "./pages/Spam"
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 
 function App() {
   const routes = createBrowserRouter([
