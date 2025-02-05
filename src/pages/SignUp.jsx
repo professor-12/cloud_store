@@ -51,7 +51,7 @@ const SignUp = () => {
                   navigate("/home");
             } catch (error) {
                   console.error("Error during submission:", error);
-                  setServerError("An unexpected error occurred.");
+                  setServerError("An unexpected error occurred. Please try again later");
 
             } finally {
                   setIsLoading(false)
@@ -61,7 +61,7 @@ const SignUp = () => {
       return (
             <form onSubmit={onSubmit} className="space-y-5 w-full max-w-[600px]">
                   <h1 className="text-4xl font-medium">Sign Up</h1>
-                  {serverError && <p className="text-red-400 text-xl">{serverError}</p>}
+                  {serverError && <p className="text-red-400  md:text-xl">{serverError}</p>}
 
                   <div className="space-y-1">
                         <label htmlFor="name" className="inline-block">

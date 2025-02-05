@@ -57,7 +57,7 @@ const Login = () => {
                   Authenticate("token", response.token);
                   setIsLoading(false);
             } catch (err) {
-                  setServerErrors(JSON.stringify(err))
+                  setServerErrors("An error occured, Please try again later")
             }
             finally {
                   setIsLoading(false)
