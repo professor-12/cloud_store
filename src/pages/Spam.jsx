@@ -12,7 +12,7 @@ const Spam = () => {
       console.log(data?.length)
       return (
             <div className='p-6 h-full'>
-                  <h1 className='text-3xl text-secondary-foreground/90'>
+                  <h1 className='text-2xl text-secondary-foreground/90'>
                         Spam
                   </h1>
                   {

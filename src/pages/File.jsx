@@ -33,15 +33,15 @@ const File = () => {
             setFile(null);
             setName("");
       };
-      
+
       useEffect(() => {
             if (error) toast.error(error);
             if (data) toast.success("File Uploaded Successfully");
       }, [data, error]);
 
       return (
-            <div className="mt-8">
-                  <div className="mx-auto max-w-[60rem] border border-border bg-primary-foreground rounded-2xl p-4">
+            <div className="mt-8 p-3">
+                  <div className="mx-auto max-w-[45rem] border border-border bg-primary-foreground rounded-2xl p-4">
                         <form onSubmit={handleSubmit} className="w-full p-4 space-y-6">
                               {/* File Drop Area */}
                               <div

@@ -70,11 +70,11 @@ const Profile = () => {
       }
 
       return (
-            <div className='p-6 overflow-auto'>
+            <div className='p-4 lg:p-6 space-y-4 overflow-auto'>
                   <h2 className="text-3xl text-accent-foreground/70">Profile</h2>
-                  <div className='p-12'>
-                        <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-12'>
-                              <div className=''>
+                  <div className='md:p-12'>
+                        <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-4'>
+                              <div className='flex-1'>
                                     <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
                                           <img src={file.url} alt="profie_picture" />
                                           <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center bg-blue-600/30   overflow-hidden group-hover:opacity-100 cursor-pointer h-full flex duration-700 transition-all '>

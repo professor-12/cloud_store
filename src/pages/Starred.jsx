@@ -17,11 +17,10 @@ const Starred = () => {
             <div className='p-8'>
                   <h1 className='text-2xl text-secondary-foreground/80 font-semibold'>Starred</h1>
                   {data.length == 0 ?
-                        <div className='p-6 h-[80%] w-full  flex items-center justify-center'>
+                        <div className='h-[80%] w-full flex  items-center justify-center'>
                               <div className=''>
-                                    <img src="/empty.png" className='h-[27rem] w-[27rem]  bg-cover' alt="" />
-                                    <p className='text-center text-3xl text-card-foreground'>No Starred Files found</p>
-
+                                    <img className='w-[22erm]  h-[22rem]' src='/empty.png' />
+                                    <h2 className='text-accent-foreground/90 text-3xl text-center'>No starred files found</h2>
                               </div>
                         </div>
                         :
