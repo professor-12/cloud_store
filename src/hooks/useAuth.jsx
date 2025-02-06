@@ -1,4 +1,3 @@
-import React from 'react'
 import useQuery from './useQuery'
 import useFetch from './useFetch'
 import { BASE_URL } from "../lib/constants"

@@ -5,10 +5,13 @@ import useAuth from '../hooks/useAuth'
 
 export const UserContext = createContext({ user: null })
 
+
 const ProtectRoute = ({ children }) => {
       const { data, error, isPending } = useAuth()
       if (isPending) {
-            return <div>Loading...</div>
+            return <div className="h-screen w-full text-center text-xl flex items-center">
+                  Loading...
+            </div>
       }
       if (!data) {
             return <Navigate to="/auth/login" replace />

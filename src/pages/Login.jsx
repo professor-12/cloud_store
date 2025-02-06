@@ -3,6 +3,7 @@ import { Authenticate } from "../lib";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../lib/constants";
+import { ThreeCircles } from "react-loader-spinner";
 
 const Login = () => {
       const [formsState, setFormState] = useState({
@@ -71,7 +72,7 @@ const Login = () => {
             }
       }, [serverError])
       return (
-            <div className="max-w-[600px] w-full p-6 rounded-lg">
+            <div className="max-w-[600px]  w-full p-6 rounded-lg">
                   <form onSubmit={onSubmit} className="space-y-5">
                         <h1 className="text-4xl font-medium">Sign In</h1>
                         <div className="space-y-1">
@@ -109,9 +110,14 @@ const Login = () => {
                         <button
                               disabled={isLoading}
                               className={`bg-primary text-primary-foreground ${isLoading ? "cursor-not-allowed opacity-90" : "cursor-pointer"
-                                    } p-3 rounded-md w-full text-md font-medium`}
+                                    } p-3 rounded-md text-lg  w-full text-md font-medium`}
                         >
-                              {isLoading ? "Loading..." : "Sign In"}
+                              {isLoading ?
+                                    <div className="flex h-full justify-center  w-full gap-2 items-center mx-auto">
+                                          <ThreeCircles color="white" width={19} height={19} />
+                                          <p>Loading</p>
+                                    </div>
+                                    : "Sign In"}
                         </button>
                         <p className="text-sm !text-muted-foreground text-left">Don&apos;t have an account? <Link className="text-blue-500" to="/auth/sign-up">Sign up</Link></p>
                   </form>

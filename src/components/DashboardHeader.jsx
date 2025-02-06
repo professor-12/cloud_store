@@ -10,13 +10,13 @@ const DashboardHeader = ({ setTheme, theme, setState }) => {
       const navigate = useNavigate()
 
       return (
-            <header className='sticky  justify-between border-b border-border  top-0 h-[4rem] p-1 pl-8 flex items-center'>
+            <header className='sticky bg-background justify-between w-full border-b border-border  top-0 h-[4rem] p-1 max-md:px-3 md:pl-8 flex items-center'>
                   {/* Search Component */}
                   <div onClick={() => { setState(prev => !prev) }} className='text-popover-foreground/80 md:hidden cursor-pointer'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
                   </div>
                   <Search />
-                  <div className='flex gap-3 h-full p-2 pr-6 items-center'>
+                  <div className='flex gap-3 h-full p-2 md:pr-6 items-center'>
                         <div onClick={setTheme} className='cursor-pointer text-popover-foreground p-2 rounded-full'>
                               {!light ?
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg> :

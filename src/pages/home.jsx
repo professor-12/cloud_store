@@ -19,7 +19,7 @@ const Home = () => {
             })
       }
       const [state, setState] = useState(!true)
-      
+
       return (
             <main className={`flex overflow-clip  ${theme} transition-al bg-background h-screen`}>
                   <div className='flex-1 min-w-[250px] max-md:hidden border-r border-border bg-background'>
@@ -30,7 +30,7 @@ const Home = () => {
                         <div className='sticky top-0'>
                               <DashboardHeader setState={setState} setTheme={toggleTheme} theme={theme} />
                         </div>
-                        <div className='h-full max-md:p-3 max-md:py-5'>
+                        <div className='h-full'>
                               <Outlet />
                         </div>
 

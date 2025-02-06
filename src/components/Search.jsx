@@ -26,7 +26,7 @@ const Search = () => {
                   onChange={(e) => setState(e.target.value)}
                   type="text"
                   placeholder="Search"
-                  className="focus:outline-none focus:border-primary placeholder:text-muted-foreground border-border border text-card-foreground p-2 px-4  lg:w-[30rem] rounded-full"
+                  className="focus:outline-none focus:border-primary max-sm:hidden flex-1 mx-4 min-w-0 placeholder:text-muted-foreground border-border border text-card-foreground p-2 px-4  max-w-[40rem] rounded-full"
             ></input>
       );
 };
