@@ -4,6 +4,10 @@
     src: url("/fonts/AeonikFono-Regular.woff2");
     font-weight: 500;
 }
+@font-face {
+    font-family: Urbanist;
+    src: url("/fonts/Urbanist-VariableFont_wght.ttf");
+}
 
 @layer base {
     :root {
@@ -87,6 +91,8 @@
     --color-chart-3: hsl(var(--chart-3));
     --color-chart-4: hsl(var(--chart-4));
     --color-chart-5: hsl(var(--chart-5));
+    --color-backgroundGreen: #0f2028;
+    --font-urbanist: var(--urbanist);
 }
 
 .react-date-picker__wrapper {
@@ -114,6 +120,10 @@
 
 .cabin {
     font-family: var(--font-cabin);
+}
+
+.urbanist {
+    font-family: Urbanist;
 }
 
 h1 {
