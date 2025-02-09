@@ -78,7 +78,7 @@ const Profile = () => {
                                     <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
                                           <img src={file.url} alt="profie_picture" />
                                           <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center bg-blue-600/30   overflow-hidden group-hover:opacity-100 cursor-pointer h-full flex duration-700 transition-all '>
-                                                <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='' onChange={(e) => uploadFile(e.target.files[0])} />
+                                                <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='image/.png,.jpg' onChange={(e) => uploadFile(e.target.files[0])} />
                                                 <p className='text-center text-2xl'>Upload Image</p>
                                           </div>
                                     </div>
