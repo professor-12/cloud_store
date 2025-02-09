@@ -120,7 +120,7 @@ const SignUp = () => {
                   <button
                         disabled={isLoading}
                         className={`bg-primary text-primary-foreground ${isLoading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-                              } p-3 rounded-md w-full text-md font-medium`}
+                              } p-3 rounded-full w-full text-md font-medium`}
                   >
                         {isLoading ? "Loading..." : "Sign Up"}
                   </button>

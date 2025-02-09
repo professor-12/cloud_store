@@ -3,7 +3,6 @@ import { Bars } from "react-loader-spinner";
 import useMutation from "../hooks/useMutation";
 import useFetch from "../hooks/useFetch";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../lib/constants"
 const File = () => {
       const [dragActive, setDragActive] = useState(false);
@@ -12,7 +11,7 @@ const File = () => {
       const { mutate, data, error, loading } = useMutation();
       const { fetchUser } = useFetch(BASE_URL + "/api/file/");
 
-
+      
       const handleSubmit = async (e) => {
             e.preventDefault();
             if (!file) {
@@ -23,7 +22,6 @@ const File = () => {
             formData.append("name", name);
             formData.append("file", file);
             formData.append("type", file.type || file.name.split(".").pop());
-            console.log(file.size)
             const maxMimumFileSize = (file.size / (1024 * 1024))
             if (maxMimumFileSize > 5) {
                   setFile(null);
@@ -41,13 +39,13 @@ const File = () => {
 
       return (
             <div className="mt-8 p-3">
-                  <div className="mx-auto max-w-[45rem] border border-border bg-primary-foreground rounded-2xl p-4">
+                  <div className="mx-auto max-w-[45rem] border border-border/70 bg-primary-foreground/50 rounded-2xl p-4">
                         <form onSubmit={handleSubmit} className="w-full p-4 space-y-6">
                               {/* File Drop Area */}
                               <div
                                     onDragOver={() => setDragActive(true)}
                                     onDragLeave={() => setDragActive(false)}
-                                    className={`border-dashed cursor-pointer items-center transition-all duration-200 justify-center relative overflow-hidden h-[12rem] border-2 flex rounded-2xl w-full ${dragActive ? "border-blue-600/90 bg-blue-100/30" : "border-card-foreground/40"
+                                    className={`border-dashed cursor-pointer items-center transition-all duration-200 justify-center relative overflow-hidden h-[12rem] border-2 flex rounded-2xl w-full ${dragActive ? "border-blue-600/90 bg-blue-100/30" : "border-card-foreground/30"
                                           }`}
                               >
                                     <div className="flex flex-col text-card-foreground items-center justify-center gap-2 cursor-pointer">

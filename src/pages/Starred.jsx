@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import FileCard from '../components/FileCard'
 import Loading from '../components/Loading'
 import { BASE_URL } from '../lib/constants'
-
+import empty from "/empty.png"
 const Starred = () => {
       const { fetchUser } = useFetch(BASE_URL + '/api/get-file/starred')
       const { data, error, isPending } = useQuery(async () => fetchUser())
@@ -19,8 +19,8 @@ const Starred = () => {
                   {data.length == 0 ?
                         <div className='h-[80%] w-full flex  items-center justify-center'>
                               <div className=''>
-                                    <img className='w-[22erm]  h-[22rem]' src='/empty.png' />
-                                    <h2 className='text-accent-foreground/90 text-3xl text-center'>No starred files found</h2>
+                                    <img className='w-[22erm]  h-[22rem]' src={empty} />
+                                    <h2 className='text-accent-foreground/90 text-2xl text-center'>No starred files found</h2>
                               </div>
                         </div>
                         :

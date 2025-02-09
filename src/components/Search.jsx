@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
 
 const Search = () => {
@@ -7,18 +7,23 @@ const Search = () => {
       const [state, setState] = useState(searchParams.get("q") || "");
       const debouncedValue = useDebounce(state, 1000);
       const navigate = useNavigate();
-
+      const location = useLocation()
       useEffect(() => {
             if (debouncedValue.trim().length == 0) {
-                  navigate("/home")
+                  if (!location.pathname.includes("search")) {
+                        return
+                  }
+                  navigate(-1)
                   return;
             }
-
             const newParams = new URLSearchParams(searchParams);
             newParams.set("q", debouncedValue);
 
-            navigate(`search/?${newParams.toString()}`);
+            navigate(`search/?${newParams.toString()}`, { replace: true });
+
       }, [debouncedValue]);
+
+      console.log(location.pathname.includes("search"))
 
       return (
             <input

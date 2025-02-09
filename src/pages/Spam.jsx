@@ -4,6 +4,7 @@ import useFetch from '../hooks/useFetch'
 import Loading from '../components/Loading'
 import FileCard from '../components/FileCard'
 import { BASE_URL } from '../lib/constants'
+import empty from "/empty.png"
 
 const Spam = () => {
       const { fetchUser } = useFetch(BASE_URL + "/api/spam/")
@@ -20,8 +21,8 @@ const Spam = () => {
                               data?.length == 0 ?
                                     <div className='h-[80%] w-full flex  items-center justify-center'>
                                           <div className=''>
-                                                <img className='w-[22erm]  h-[22rem]' src='/empty.png' />
-                                                <h2 className='text-accent-foreground/80 text-3xl text-center'>Spam folder is empty</h2>
+                                                <img className='w-[22erm]  h-[22rem]' src={empty} />
+                                                <h2 className='text-accent-foreground/80 text-xl text-center'>Spam folder is empty</h2>
                                           </div>
                                     </div> :
                                     <div className='w-full grid grid-cols-3 gap-4 pt-6'>

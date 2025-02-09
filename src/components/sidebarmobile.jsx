@@ -21,7 +21,7 @@ const SideBarMobile = ({ state, setState }) => {
                                     links.map(({ name, path, ...s }, index) => {
                                           const isActive = path === pathName
                                           return (
-                                                <li onClick={() => { navigate(path); setState(false) }} key={index} className={`flex text-card-foreground/80  font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent-foreground/10 text-blue-800/90" : null} `}>
+                                                <li onClick={() => { navigate(path); setState(false) }} key={index} className={`flex text-card-foreground  font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent-foreground/10 text-blue-800/90" : null} `}>
                                                       {<s.svg />}
                                                       <p>
                                                             {name}
