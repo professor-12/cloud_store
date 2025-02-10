@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Authenticate } from "../lib";
 import { BASE_URL } from "../lib/constants";
+import { ThreeCircles } from "react-loader-spinner";
 
 const SignUp = () => {
       const [formsState, setFormState] = useState({ email: "", name: "", password: "" });
@@ -59,27 +60,10 @@ const SignUp = () => {
       };
 
       return (
-            <form onSubmit={onSubmit} className="space-y-5 w-full max-w-[600px]">
-                  <h1 className="text-4xl font-medium">Sign Up</h1>
+            <form onSubmit={onSubmit} className="space-y-5 text-muted w-full max-w-[600px]">
+                  <h1 className="text-3xl md:text-4xl font-medium">Sign Up</h1>
                   {serverError && <p className="text-red-400  md:text-xl">{serverError}</p>}
 
-                  <div className="space-y-1">
-                        <label htmlFor="name" className="inline-block">
-                              Name<span className="text-red-600 text-lg">*</span>
-                        </label>
-                        <input
-                              id="name"
-                              name="name"
-                              required
-                              placeholder="Your name"
-                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded ${error.name ? "border-red-600" : "border-white/20"
-                                    }`}
-                              onChange={handleChange}
-                        />
-                        {error.name && (
-                              <span className="text-red-600/90 text-sm">Your name must be at least 3 characters.</span>
-                        )}
-                  </div>
 
                   <div className="space-y-1">
                         <label htmlFor="email" className="inline-block">
@@ -91,12 +75,31 @@ const SignUp = () => {
                               type="email"
                               required
                               placeholder="Your Email"
-                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded ${error.email ? "border-red-600" : "border-white/20"
+                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded-lg ${error.email ? "border-red-600" : "border-white/10"
                                     }`}
                               onChange={handleChange}
                         />
                         {error.email && <span className="text-red-600/60 text-sm">Invalid Email</span>}
                   </div>
+                  <div className="space-y-1">
+                        <label htmlFor="name" className="inline-block">
+                              Name<span className="text-red-600 text-lg">*</span>
+                        </label>
+                        <input
+                              id="name"
+                              name="name"
+                              required
+                              placeholder="Your name"
+                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded-lg ${error.name ? "border-red-600" : "border-white/10"
+                                    }`}
+                              onChange={handleChange}
+                        />
+                        {error.name && (
+                              <span className="text-red-600/90 text-sm">Your name must be at least 3 characters.</span>
+                        )}
+                  </div>
+
+
 
                   <div className="space-y-1">
                         <label htmlFor="password" className="inline-block">
@@ -108,7 +111,7 @@ const SignUp = () => {
                               type="password"
                               required
                               placeholder="Your password"
-                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded ${error.password ? "border-red-600" : "border-white/20"
+                              className={`w-full border px-3 bg-slate-500/10 focus:outline-none p-2 rounded-lg ${error.password ? "border-red-600" : "border-white/10"
                                     }`}
                               onChange={handleChange}
                         />
@@ -120,11 +123,14 @@ const SignUp = () => {
                   <button
                         disabled={isLoading}
                         className={`bg-primary text-primary-foreground ${isLoading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-                              } p-3 rounded-full w-full text-md font-medium`}
+                              } p-2 md:p-3 rounded-full w-full md:text-md font-medium`}
                   >
-                        {isLoading ? "Loading..." : "Sign Up"}
+                        {isLoading ? <div className="flex h-full justify-center  w-full gap-2 items-center mx-auto">
+                              <ThreeCircles color="white" width={19} height={19} />
+                              <p>Loading</p>
+                        </div> : "Sign Up"}
                   </button>
-                  <p className="text-sm !text-muted-foreground text-left">Already a member? <Link className="text-blue-500" to="/auth/login">Login in!</Link></p>
+                  <p className="text-sm !text-muted-foreground text-left">Already a member? <Link className="text-primary" to="/auth/login">Login in!</Link></p>
             </form>
       );
 };

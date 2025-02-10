@@ -46,11 +46,14 @@ const SideBar = () => {
       const pathName = a.pathname.split("/")[2] ?? ""
       return (
             <>
-                  <aside className='p-5  h-screen bg-primary-foreground'>
+                  <aside className='p-5  h-screen bg-card'>
                         <div className='flex px-4 relative items-center mb-6 gap-3 cursor-pointer text-card-foreground'>
                               <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" stroke-linecap="round" strokeLinejoin="round" class="lucide lucide-cloud"> <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg>
                               <h1 className='text-2xl max-lg:text-xl font-stretch-normal font-medium '>
-                                    Cloud Store
+                                    Cloud
+                                    <span className='text-primary'>
+                                          Store
+                                    </span>
                               </h1>
                         </div>
 
@@ -60,7 +63,7 @@ const SideBar = () => {
                                           links.map(({ name, path, ...s }, index) => {
                                                 const isActive = path === pathName
                                                 return (
-                                                      <li onClick={() => navigate(path)} key={index} className={`flex text-card-foreground/60  font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent-foreground/10 text-blue-800/90" : null}`}>
+                                                      <li onClick={() => navigate(path)} key={index} className={`flex text-secondary-foreground font-normal rounded-full  items-center gap-3 px-6 transition-colors duration-500 p-2 cursor-pointer ${isActive ? "bg-accent" : null}`}>
                                                             {<s.svg />}
                                                             <p>
                                                                   {name}

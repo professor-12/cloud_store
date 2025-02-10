@@ -14,8 +14,12 @@ const SideBarMobile = ({ state, setState }) => {
       }, [state])
       return (
             <>
-                  <div className={`fixed shadow flex flex-col py-4 px-3 top-0 transition-transform duration-300 bottom-0 z-[9999999] bg-secondary w-[65%] shadow-ring ${!state && "translate-x-[-1000%]"}`}>
-                        <div className='text-2xl tracking-wider px-4 text-left text-accent-foreground'>CloudStore</div>
+                  <div className={`fixed  bg-accent/30 flex flex-col py-4 px-3 top-0 transition-transform duration-300 bottom-0 z-[9999999] bg-acce w-[65%] shadow-ring ${!state && "translate-x-[-1000%]"}`}>
+                        <div className='text-2xl tracking-wider px-4 text-left text-accent-foreground'>Cloud
+                              <span className='text-primary'>
+                                    Store
+                              </span>
+                        </div>
                         <ul className='flex flex-1 gap-1 flex-col my-6 text-[15px]'>
                               {
                                     links.map(({ name, path, ...s }, index) => {

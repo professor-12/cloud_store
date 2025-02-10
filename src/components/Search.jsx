@@ -23,7 +23,6 @@ const Search = () => {
 
       }, [debouncedValue]);
 
-      console.log(location.pathname.includes("search"))
 
       return (
             <input

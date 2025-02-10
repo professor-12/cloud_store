@@ -66,7 +66,6 @@ const Profile = () => {
       const uploadFile = (mediasource) => {
             const url = URL.createObjectURL(mediasource)
             setFile((prev) => { return { file: mediasource, url } })
-            console.log(url)
       }
 
       return (

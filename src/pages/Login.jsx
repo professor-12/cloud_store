@@ -72,9 +72,9 @@ const Login = () => {
             }
       }, [serverError])
       return (
-            <div className="max-w-[600px]  w-full p-6 rounded-lg">
+            <div className="max-w-[600px] text-muted  w-full  md:p-6 rounded-lg">
                   <form onSubmit={onSubmit} className="space-y-5">
-                        <h1 className="text-4xl font-medium">Sign In</h1>
+                        <h1 className="text-3xl md:text-4xl font-medium">Sign In</h1>
                         <div className="space-y-1">
                               <label htmlFor="email" className="inline-block">
                                     Email<span className="text-red-600 text-lg">*</span>
@@ -84,7 +84,7 @@ const Login = () => {
                                     name="email"
                                     type="text"
                                     placeholder="Email"
-                                    className="w-full border-white/20 px-3 bg-slate-500/10 focus:outline-none border p-2 rounded"
+                                    className="w-full border-white/10 px-3 bg-slate-500/10 focus:outline-none border p-2 rounded-md"
                                     onChange={(e) => { setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value, })); setError((prev) => ({ ...prev, [e.target.name]: false })) }}
                               />
                               {error?.email && (
@@ -100,7 +100,7 @@ const Login = () => {
                                     name="password"
                                     type="password"
                                     placeholder="Password"
-                                    className="w-full border-white/20 px-3 bg-slate-500/10 focus:outline-none border p-2 rounded"
+                                    className="w-full border-white/10 px-3 bg-slate-500/10 focus:outline-none border p-2 rounded-md"
                                     onChange={(e) => { setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value, })); setError((prev) => ({ ...prev, [e.target.name]: false })) }}
                               />
                               {error?.password && (
@@ -110,7 +110,7 @@ const Login = () => {
                         <button
                               disabled={isLoading}
                               className={`bg-primary text-primary-foreground ${isLoading ? "cursor-not-allowed opacity-90" : "cursor-pointer"
-                                    } p-3 rounded-md text-lg  w-full text-md font-medium`}
+                                    } p-2 md:p-3 rounded-full md:text-lg  w-full md:text-md font-medium`}
                         >
                               {isLoading ?
                                     <div className="flex h-full justify-center  w-full gap-2 items-center mx-auto">
@@ -119,7 +119,7 @@ const Login = () => {
                                     </div>
                                     : "Sign In"}
                         </button>
-                        <p className="text-sm !text-muted-foreground text-left">Don&apos;t have an account? <Link className="text-blue-500" to="/auth/sign-up">Sign up</Link></p>
+                        <p className="text-sm !text-muted-foreground text-left">Don&apos;t have an account? <Link className="text-primary" to="/auth/sign-up">Sign up</Link></p>
                   </form>
             </div>
       );
