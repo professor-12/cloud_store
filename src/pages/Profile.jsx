@@ -76,9 +76,9 @@ const Profile = () => {
                               <div className='flex-1'>
                                     <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
                                           <img src={file.url} alt="profie_picture" />
-                                          <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center bg-blue-600/30   overflow-hidden group-hover:opacity-100 cursor-pointer h-full flex duration-700 transition-all '>
+                                          <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center    overflow-hidden cursor-pointer h-full flex duration-700 transition-all '>
                                                 <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='image/.png,.jpg' onChange={(e) => uploadFile(e.target.files[0])} />
-                                                <p className='text-center text-2xl'>Upload Image</p>
+                                               
                                           </div>
                                     </div>
                               </div>
@@ -96,7 +96,7 @@ const Profile = () => {
                                           <DatePicker maxDate={new Date("12-12-2020")} className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' id="dob" onChange={setDob} value={dob ?? new Date()} />
 
                                     </div>
-                                    <button disabled={!bio && !dob && !location || loading} className='disabled:bg-blue-500/70 p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-blue-500'>Edit Profile</button>
+                                    <button disabled={!bio && !dob && !location || loading} className='disabled:bg-primary p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-primary'>Edit Profile</button>
 
                               </div>
                         </form>

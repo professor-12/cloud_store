@@ -39,13 +39,13 @@ const File = () => {
 
       return (
             <div className="mt-8 p-3">
-                  <div className="mx-auto max-w-[45rem] border border-border/70 bg-primary-foreground/50 rounded-2xl p-4">
+                  <div className="mx-auto max-w-[45rem] border border-border/70  rounded-2xl p-4">
                         <form onSubmit={handleSubmit} className="w-full p-4 space-y-6">
                               {/* File Drop Area */}
                               <div
                                     onDragOver={() => setDragActive(true)}
                                     onDragLeave={() => setDragActive(false)}
-                                    className={`border-dashed cursor-pointer items-center transition-all duration-200 justify-center relative overflow-hidden h-[12rem] border-2 flex rounded-2xl w-full ${dragActive ? "border-blue-600/90 bg-blue-100/30" : "border-card-foreground/30"
+                                    className={`border-dashed cursor-pointer items-center transition-all duration-200 justify-center relative overflow-hidden h-[12rem] border-2 flex rounded-2xl w-full ${dragActive ? "border-blue-600/90 bg-blue-400/30" : "border-card-foreground/30"
                                           }`}
                               >
                                     <div className="flex flex-col text-card-foreground items-center justify-center gap-2 cursor-pointer">
@@ -115,7 +115,7 @@ const File = () => {
                               <button
                                     type="submit"
                                     disabled={!name || !file || loading}
-                                    className="bg-primary disabled:bg-blue-500/50 px-3 p-2 rounded-lg text-white cursor-pointer"
+                                    className="bg-primary disabled:bg-primary/50 px-3 p-2 rounded-lg text-white cursor-pointer"
                               >
                                     {loading ? (
                                           <span className="flex items-center gap-3">
