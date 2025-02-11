@@ -33,7 +33,7 @@ const ContextMenu = ({ data }) => {
       const { blobData, downloadFile, loading, blobUrl, error } = useFileDownload()
 
       return <div className=" absolute top-2 bg-white p-1 rounded-lg w-[80%] min-w-[200px] -right-[12px] z-[99999] shadow border border-gray-300/30">
-            <ul className='*:p-1 *:px-2 *:hover:bg-accent-foreground/20 py-2 space-y-px *:bg-card '>
+            <ul className='*:p-1 *:px-2 *:hover:bg-accent-foreground/20 py-2 space-y-px'>
                   <li>
                         <a className="flex gap-1 items-center" href={data?.file} target='_blank'>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="M13.234 20.252 21 12.3" /><path d="m16 6-8.414 8.586a2 2 0 0 0 0 2.828 2 2 0 0 0 2.828 0l8.414-8.586a4 4 0 0 0 0-5.656 4 4 0 0 0-5.656 0l-8.415 8.585a6 6 0 1 0 8.486 8.486" /></svg> Open file with
