@@ -9,9 +9,9 @@ const File = () => {
       const [file, setFile] = useState(null);
       const [name, setName] = useState("");
       const { mutate, data, error, loading } = useMutation();
-      const { fetchUser } = useFetch(BASE_URL + "/api/file/");
+      const { fetchUser } = useFetch(BASE_URL + "api/file/");
 
-      
+
       const handleSubmit = async (e) => {
             e.preventDefault();
             if (!file) {
@@ -19,7 +19,7 @@ const File = () => {
                   return;
             }
             const formData = new FormData();
-            formData.append("name", name);
+            formData.append("name", name.slice(0, 20));
             formData.append("file", file);
             formData.append("type", file.type || file.name.split(".").pop());
             const maxMimumFileSize = (file.size / (1024 * 1024))
