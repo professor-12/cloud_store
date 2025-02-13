@@ -4,7 +4,7 @@ import Homepage from "./pages/Homepage"
 import Login from "./pages/Login"
 import Auth from './pages/Auth'
 import SignUp from "./pages/SignUp"
-import Home from "./pages/home"
+
 import ProtectRoute from "./components/ProtectRoute"
 import HomeIndex from "./pages/home.index"
 import File from "./pages/File"
@@ -17,6 +17,7 @@ import Search from "./pages/Search"
 import Spam from "./pages/Spam"
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import HomeLayout from "./pages/home"
 
 function App() {
   const routes = createBrowserRouter([
@@ -29,7 +30,7 @@ function App() {
     {
       path: "/home", element:
         <ProtectRoute>
-          <Home />
+          <HomeLayout />
         </ProtectRoute>
       , children: [
         {
