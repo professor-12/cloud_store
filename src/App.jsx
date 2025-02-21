@@ -11,13 +11,13 @@ import File from "./pages/File"
 import MyStorage from "./pages/myStorage"
 import { Toaster } from "react-hot-toast"
 import Profile from "./pages/Profile"
-import FileContext from "./context/file-context"
 import Starred from "./pages/Starred"
 import Search from "./pages/Search"
 import Spam from "./pages/Spam"
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import HomeLayout from "./pages/home"
+import GoogleCallback from "./pages/google/page"
 
 function App() {
   const routes = createBrowserRouter([
@@ -73,6 +73,9 @@ function App() {
           },
           {
             path: "sign-up", element: <SignUp />
+          },
+          {
+            path: "google/callback", element: <GoogleCallback />
           }
         ]
     },
@@ -90,21 +93,3 @@ function App() {
 }
 
 export default App
-
-
-/**
- * /login,
- * /onboarding,
- * /console,
- * /register,
- * /
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
