@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { toast } from "react-hot-toast"
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { BASE_URL } from '../../lib/constants'
 
 
 const GoogleCallback = () => {
@@ -16,7 +17,7 @@ const GoogleCallback = () => {
             }
             const get = async () => {
                   try {
-                        const response = await fetch("http://localhost:8000/api/google/callback?code=" + code);
+                        const response = await fetch(BASE_URL + "/api/google/callback?code=" + code);
                         const data = await response.json()
                         if (!response.ok) {
                               toast.error("An error occured")
