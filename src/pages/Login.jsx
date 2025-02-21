@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Authenticate } from "../lib";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../lib/constants";
+import { BASE_URL, GOOGLE_URL } from "../lib/constants";
 import { ThreeCircles } from "react-loader-spinner";
 
 const Login = () => {
+
       const [formsState, setFormState] = useState({
             email: "",
             password: "",
@@ -66,6 +67,7 @@ const Login = () => {
       };
 
 
+
       useEffect(() => {
             if (serverError) {
                   toast.error(serverError)
@@ -119,6 +121,10 @@ const Login = () => {
                                     </div>
                                     : "Sign In"}
                         </button>
+                        <div className="flex justify-center">
+
+                              <div onClick={() => location.href = GOOGLE_URL} className="rounded-full cursor-pointer hover:bg-primary/20 transition-all duration-300 hover:text-white w-full p-3 text-center">Login with Google</div>
+                        </div>
                         <p className="text-sm !text-muted-foreground text-left">Don&apos;t have an account? <Link className="text-primary" to="/auth/sign-up">Sign up</Link></p>
                   </form>
             </div>

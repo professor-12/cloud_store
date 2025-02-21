@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Authenticate } from "../lib";
-import { BASE_URL } from "../lib/constants";
+import { BASE_URL, GOOGLE_URL } from "../lib/constants";
 import { ThreeCircles } from "react-loader-spinner";
 
 const SignUp = () => {
@@ -130,7 +130,10 @@ const SignUp = () => {
                               <p>Loading</p>
                         </div> : "Sign Up"}
                   </button>
-                  <p className="text-sm !text-muted-foreground text-left">Already a member? <Link className="text-primary" to="/auth/login">Login in!</Link></p>
+
+                  <div className="flex justify-center">
+                        <div onClick={() => location.href = GOOGLE_URL} className="rounded-full cursor-pointer hover:bg-primary/20 transition-all duration-300 hover:text-white w-full p-3 text-center">Sign in with Google</div>
+                  </div>                  <p className="text-sm !text-muted-foreground text-left">Already a member? <Link className="text-primary" to="/auth/login">Login in!</Link></p>
             </form>
       );
 };
