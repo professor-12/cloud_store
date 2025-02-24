@@ -11,7 +11,7 @@ import DatePicker from 'react-date-picker'
 
 const Profile = () => {
 
-      const [file, setFile] = useState({ file: "", url: "" })
+      const [file, setFile] = useState("")
       const [bio, setBio] = useState("")
       const [location, setLocation] = useState("")
       const [dob, setDob] = useState("")
@@ -30,8 +30,7 @@ const Profile = () => {
                   setBio(data.bio)
                   setLocation(data.location)
                   setDob(data.birth_date)
-                  setFile((prev) => ({ ...prev, url: data.profile_picture }))
-
+                  setFile(data.profile_picture)
             }
             fetchData()
       }, [])
@@ -51,21 +50,26 @@ const Profile = () => {
       }, [error, data])
       const handleSubmit = async (e) => {
             e.preventDefault()
-            const formData = new FormData()
-            formData.append('bio', bio)
-            formData.append('location', location)
-            const date = new Date(dob || -1)
-            const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-            formData.append('birth_date', formattedDate)
-            formData.append("profile_picture", file.file)
+            const formData = { location, bio, birth_date: dob }
             await mutate(async () => {
-                  return fetchUser({ method: "POST", body: formData })
+                  return fetchUser({ method: "POST", body: JSON.stringify(formData) })
             })
 
       }
+
+
+
       const uploadFile = (mediasource) => {
-            const url = URL.createObjectURL(mediasource)
-            setFile((prev) => { return { file: mediasource, url } })
+            const file = new FileReader()
+            file.readAsDataURL(mediasource)
+            file.onload = async () => {
+                  const url = file.result
+                  setFile(url)
+                  await mutate(async () => {
+                        return fetchUser({ method: "POST", body: JSON.stringify({ profile_picture: url }) })
+                  })
+            }
+
       }
 
       return (
@@ -75,10 +79,10 @@ const Profile = () => {
                         <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-4'>
                               <div className='flex-1'>
                                     <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
-                                          <img src={file.url} alt="profie_picture" />
+                                          <img src={file} alt="profie_picture" />
                                           <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center    overflow-hidden cursor-pointer h-full flex duration-700 transition-all '>
                                                 <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='image/.png,.jpg' onChange={(e) => uploadFile(e.target.files[0])} />
-                                               
+
                                           </div>
                                     </div>
                               </div>
@@ -97,7 +101,6 @@ const Profile = () => {
 
                                     </div>
                                     <button disabled={!bio && !dob && !location || loading} className='disabled:bg-primary p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-primary'>Edit Profile</button>
-
                               </div>
                         </form>
                   </div>

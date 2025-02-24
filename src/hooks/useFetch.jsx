@@ -6,7 +6,7 @@ const useFetch = (endpoint) => {
 
             try {
                   response = await fetch(endpoint, {
-                        headers: { Authorization: `Token ${token}` },
+                        headers: { Authorization: `Token ${token}`, "Content-Type": "application/json" },
                         ...methods,
                   });
 
