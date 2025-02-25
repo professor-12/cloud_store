@@ -121,10 +121,10 @@ const Login = () => {
                                     </div>
                                     : "Sign In"}
                         </button>
-                        <div className="flex justify-center">
+                        {/* <div className="flex justify-center">
 
                               <div onClick={() => location.href = GOOGLE_URL} className="rounded-full cursor-pointer hover:bg-primary/20 transition-all duration-300 hover:text-white w-full p-3 text-center">Login with Google</div>
-                        </div>
+                        </div> */}
                         <p className="text-sm !text-muted-foreground text-left">Don&apos;t have an account? <Link className="text-primary" to="/auth/sign-up">Sign up</Link></p>
                   </form>
             </div>

@@ -18,6 +18,7 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import HomeLayout from "./pages/home"
 import GoogleCallback from "./pages/google/page"
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   const routes = createBrowserRouter([

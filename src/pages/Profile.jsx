@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
-import useQuery from '../hooks/useQuery'
 import useMutation from '../hooks/useMutation'
 import useFetch from '../hooks/useFetch'
-import { GETNENV } from '../lib/utlis'
 import { BASE_URL } from '../lib/constants'
 import DatePicker from 'react-date-picker'
-
+import Modal from '../components/ui/Modal'
+import PreveiwImage from '../components/PreveiwImage'
 
 
 const Profile = () => {
 
-      const [file, setFile] = useState({ file: "", url: "" })
+      const [file, setFile] = useState("")
       const [bio, setBio] = useState("")
       const [location, setLocation] = useState("")
       const [dob, setDob] = useState("")
       const { data, error, loading, mutate } = useMutation()
       const { fetchUser } = useFetch(`${BASE_URL}/api/profile/`)
+      const [canEditProfile, setCanEditProfile] = useState(false)
+      const [openEditProfileModal, setOpenEdiProfiletModal] = useState(false)
+
+      const imageRef = useRef()
       useEffect(() => {
             const fetchData = async () => {
                   const res = await fetch(`${BASE_URL}/api/profile/`, {
@@ -30,8 +33,7 @@ const Profile = () => {
                   setBio(data.bio)
                   setLocation(data.location)
                   setDob(data.birth_date)
-                  setFile((prev) => ({ ...prev, url: data.profile_picture }))
-
+                  setFile(data.profile_picture)
             }
             fetchData()
       }, [])
@@ -45,27 +47,36 @@ const Profile = () => {
                   setBio(data.bio)
                   setLocation(data.location)
                   setDob(data.birth_date)
-                  setFile({ file: null, url: data.profile_picture })
+                  setFile(data.profile_picture)
+                  setOpenEdiProfiletModal(false)
             }
 
       }, [error, data])
       const handleSubmit = async (e) => {
             e.preventDefault()
-            const formData = new FormData()
-            formData.append('bio', bio)
-            formData.append('location', location)
-            const date = new Date(dob || -1)
-            const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-            formData.append('birth_date', formattedDate)
-            formData.append("profile_picture", file.file)
+            const formData = { location, bio, birth_date: dob }
             await mutate(async () => {
-                  return fetchUser({ method: "POST", body: formData })
+                  return fetchUser({ method: "POST", body: JSON.stringify(formData) })
             })
 
       }
       const uploadFile = (mediasource) => {
-            const url = URL.createObjectURL(mediasource)
-            setFile((prev) => { return { file: mediasource, url } })
+            if (!mediasource) return
+            const file = new FileReader()
+            file.readAsDataURL(mediasource)
+            file.onload = async () => {
+                  const url = file.result
+
+                  await mutate(async () => {
+                        return fetchUser({ method: "POST", body: JSON.stringify({ profile_picture: url }) })
+                  })
+
+            }
+            file.onloadstart = () => { }
+
+            file.onerror = () => {
+                  toast.error("An error occurred")
+            }
       }
 
       return (
@@ -74,34 +85,41 @@ const Profile = () => {
                   <div className='md:p-12'>
                         <form onSubmit={handleSubmit} className='flex max-md:flex-col w-full gap-4'>
                               <div className='flex-1'>
-                                    <div className='bg-slate-500/10 flex group items-center justify-center rounded-md overflow-hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
-                                          <img src={file.url} alt="profie_picture" />
-                                          <div className='absolute top-0 left-0 right-0 bottom-0 opacity-0 items-center justify-center    overflow-hidden cursor-pointer h-full flex duration-700 transition-all '>
-                                                <input type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='image/.png,.jpg' onChange={(e) => uploadFile(e.target.files[0])} />
-                                               
+                                    <div className='bg-slate-500/10 flex group items-center justify-center rounded-md -hidden relative  md:h-[20rem]  w-[8rem] h-[8rem] md:w-[20rem]'>
+                                          <div className='relative  w-full h-full items-center flex overflow-hidden'>
+                                                <img src={file} className="bg-cover " alt=" profie_picture" />
                                           </div>
+                                          <div className='hidden'>
+                                                <input ref={imageRef} type="file" className='opacity-0 absolute cursor-pointer   backdrop:blur-[200px] top-0 bottom-0 right-0 left-0' accept='image/.png,.jpg' onChange={() => setOpenEdiProfiletModal(true)} />
+                                          </div>
+                                          <div className='absolute -bottom-2 cursor-pointer  -right-2 bg-primary w-8  h-8 rounded-full' onClick={() => imageRef.current.click()}></div>
                                     </div>
                               </div>
                               <div className='space-y-4 text-card-foreground/80 w-full'>
                                     <div className='space-y-3'>
                                           <label className='block' htmlFor="bio">Bio</label>
-                                          <input value={bio} onChange={(e) => { setBio(e.target.value) }} id="bio" name='bio' type="text" className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' />
+                                          <input value={bio} onChange={(e) => { setCanEditProfile(true); setBio(e.target.value) }} id="bio" name='bio' type="text" className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' />
                                     </div>
                                     <div className='space-y-3'>
                                           <label className='block' htmlFor="location">Address</label>
-                                          <input value={location} onChange={(e) => setLocation(e.target.value)} id="location" name='location' type="text" className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' />
+                                          <input value={location} onChange={(e) => { setLocation(e.target.value); setCanEditProfile(true) }} id="location" name='location' type="text" className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' />
                                     </div>
                                     <div className='space-y-3'>
                                           <label className='block' htmlFor="dob">Date of Birth</label>
-                                          <DatePicker maxDate={new Date("12-12-2020")} className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' id="dob" onChange={setDob} value={dob ?? new Date()} />
+                                          <DatePicker maxDate={new Date("12-12-2020")} className='border w-full max-w-[40rem] focus:border-blue-500/80 focus:outline-none rounded-lg border-gray-500/30 p-2' id="dob" onChange={(e) => { setCanEditProfile(true); setDob(e) }} value={dob ?? new Date()} />
 
                                     </div>
-                                    <button disabled={!bio && !dob && !location || loading} className='disabled:bg-primary p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-primary'>Edit Profile</button>
+                                    {openEditProfileModal && imageRef?.current?.files[0] &&
+                                          <Modal onClick={(e) => setOpenEdiProfiletModal(false)} className="flex items-center justify-center cursor-pointer">
+                                                <PreveiwImage loading={loading} onClick={() => uploadFile(imageRef.current.files[0])} onClose={() => setOpenEdiProfiletModal(false)} imageURL={URL.createObjectURL(imageRef?.current?.files[0])} />
 
+                                          </Modal>
+                                    }
+                                    <button disabled={!bio && !dob && !location || loading || !canEditProfile} className='disabled:bg-primary/50 p-3 transition-all duration-200 rounded-lg text-white cursor-pointer bg-primary'>Edit Profile</button>
                               </div>
                         </form>
-                  </div>
-            </div>
+                  </div >
+            </div >
       )
 }
 

@@ -132,7 +132,7 @@ const SignUp = () => {
                   </button>
 
                   <div className="flex justify-center">
-                        <div onClick={() => location.href = GOOGLE_URL} className="rounded-full cursor-pointer hover:bg-primary/20 transition-all duration-300 hover:text-white w-full p-3 text-center">Sign in with Google</div>
+                        {/* <div onClick={() => location.href = GOOGLE_URL} className="rounded-full cursor-pointer hover:bg-primary/20 transition-all duration-300 hover:text-white w-full p-3 text-center">Sign in with Google</div> */}
                   </div>                  <p className="text-sm !text-muted-foreground text-left">Already a member? <Link className="text-primary" to="/auth/login">Login in!</Link></p>
             </form>
       );

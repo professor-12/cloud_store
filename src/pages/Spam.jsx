@@ -5,6 +5,7 @@ import Loading from '../components/Loading'
 import FileCard from '../components/FileCard'
 import { BASE_URL } from '../lib/constants'
 import empty from "/empty.png"
+import LoadingSkeleton from '../components/ui/LoadingSkeleton'
 
 const Spam = () => {
       const { fetchUser } = useFetch(BASE_URL + "/api/spam/")
@@ -17,7 +18,9 @@ const Spam = () => {
                         Spam
                   </h1>
                   {
-                        isPending ? <Loading /> :
+                        isPending ? <div className='mt-6'>
+                              <LoadingSkeleton />
+                        </div> :
                               data?.length == 0 ?
                                     <div className='h-[80%] w-full flex  items-center justify-center'>
                                           <div className=''>
