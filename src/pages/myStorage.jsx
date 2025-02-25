@@ -28,10 +28,9 @@ const MyStorage = () => {
                         </button>
                   </Link>
             </div>
-
             {
 
-                  true ? <div className='mt-6'>
+                  isPending ? <div className='mt-6'>
                         <LoadingSkeleton />
                   </div> :
                         data?.files?.length == 0 ?
