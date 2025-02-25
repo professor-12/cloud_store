@@ -27,7 +27,18 @@ const File = () => {
                   setFile(null);
                   return toast.error("File too large")
             }
-            await mutate(async () => await fetchUser({ method: "POST", body: formData }));
+            await mutate(async () => {
+                  const data = await fetch(BASE_URL + "api/file/", {
+                        body: formData,
+                        method: "POST",
+                        headers: {
+                              "Authorization": "Token " + localStorage.getItem("token")
+                        }
+                  })
+                  const respose = await data.json()
+                  if (!data.ok) throw new Error(respose.message)
+                  return respose
+            });
             setFile(null);
             setName("");
       };

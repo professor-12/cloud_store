@@ -12,7 +12,7 @@ const Starred = () => {
       const { data, error, isPending } = useQuery(async () => fetchUser())
 
       return (
-            <div className='p-8'>
+            <div className='py-8 md:p-8 px-4'>
                   <h1 className='text-2xl text-secondary-foreground/80 font-semibold'>Starred</h1>
                   {
 

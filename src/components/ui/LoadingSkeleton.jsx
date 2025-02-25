@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 
 const LoadingSkeleton = () => {
       return (
-            <div className='grid gap-12 p-3 grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-6 md:gap-12 md:p-3 grid-cols-2 lg:grid-cols-3'>
                   {
                         new Array(12).fill(0).map((_, index) => {
                               return (

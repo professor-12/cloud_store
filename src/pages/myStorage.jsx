@@ -15,21 +15,14 @@ const MyStorage = () => {
       const { fetchUser } = useFetch(BASE_URL + '/api/get-file/')
       const { data, error, isPending } = useQuery(async () => fetchUser())
 
-      if (error) return <Navigate to={"/auth/login"} replace state={"my_file"} />
-      // {
-      //       isPending ?
-      //             <LoadingSkeleton /> : data.length == 0 ? <div className='p-6 h-[80%] w-full  flex items-center justify-center'>
+      if (error) return <Navigate to={"/auth/login"} replace />
 
-      //             </div> : 
-
-
-      // }
-      return <div className='p-6 h-full'>
+      return <div className='px-2 py-3 pb-12 md:p-6 h-full'>
             <div className='flex sticky top-0 z-[9] px-5 place-items-center justify-between w-full gap-2 bg-background'>
                   <h1 className='text-2xl  text-card-foreground  font-semibold  block  top-0 tracking-wider'>My Files</h1> <Link to={"/home/create-file"}>
                         <button className='bg-primary hover:bg-primary/90 duration-300  transition-all p-3 cursor-pointer  text-sm tracking-wide  px-4 rounded-xl text-white mb-5 inline-flex items-center gap-2'>
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></svg>
-                              <span>
+                              <span className='max-sm:text-sm'>
                                     Upload new File
                               </span>
                         </button>
@@ -38,10 +31,10 @@ const MyStorage = () => {
 
             {
 
-                  isPending ? <div className='mt-6'>
+                  true ? <div className='mt-6'>
                         <LoadingSkeleton />
                   </div> :
-                        data?.length == 0 ?
+                        data?.files?.length == 0 ?
                               <div className=''>
                                     <img src={empty} className='h-[27rem] w-[27rem]  bg-cover' alt="" />
                                     <p className='text-center text-2xl text-card-foreground'>No Files found</p>
